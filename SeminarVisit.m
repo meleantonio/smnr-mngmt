@@ -59,9 +59,9 @@ classdef SeminarVisit < handle
         
         function [G, slots, names,weighted_preferences, mealspreferences ] = extract_preferences(obj)
             % EXTRACT_PREFERENCES: downloads preferences collected with the Google Form, stores them into private properties
-            % Notice: the Google Form and the Google Spreadsheet must be organized according to a specific format (see example at xxxxxxxxx)
+            % Notice: the Google Form and the Google Spreadsheet must be organized according to a specific format (see README file for the links to the templates)
             % IMPORTANT: you need to make the google spreadsheet associated with the form either public or visible for whoever has the link. If it is private, the code will not extract the preferences. 
-            % Uses the GetGoogleSpreadsheet library, by Daniel, available at:  http://uk.mathworks.com/matlabcentral/fileexchange/39915-getgooglespreadsheet
+            % Uses the GetGoogleSpreadsheet library available at:  http://uk.mathworks.com/matlabcentral/fileexchange/39915-getgooglespreadsheet
 
             G = GetGoogleSpreadsheet(obj.googleformid) ; % download the data into a matrix
             [gr,gc ] = size(G);
