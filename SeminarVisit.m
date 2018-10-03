@@ -133,8 +133,12 @@ classdef SeminarVisit < handle
             names_temp2 = names_temp(find(assignment~=0)); % eliminate people that are not assigned to any slot
             assignment2 = assignment(assignment~=0);
             
-            for i = 1: length(assignment2)
-                slots_who1(i) = names_temp2(assignment2==i) ; % get the right name
+            for i = 1: length(obj.slots)
+                if ~isempty(names_temp2(assignment2==i))
+                    slots_who1(i) = names_temp2(assignment2==i) ; 
+                else
+                    slots_who1(i) = {'FREE'};
+                end% get the right name
                 slots_who2(i) = obj.slots(i); % get the right slots associated with the name
             end
             
