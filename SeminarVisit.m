@@ -321,8 +321,14 @@ classdef SeminarVisit < handle
                     end
 
                     if event <= length(obj.slots)
-                        fprintf(fid, [char(obj.slots_who{2}(event)), ' & Meet with ', char(obj.slots_who{1}(event)), ' & ', obj.office,'  \\\\ \n']);
-                        fprintf(fid, '\\vspace{1mm} \n');
+                        if strcmp(obj.slots_who{1}(event), 'FREE')
+                            fprintf(fid, [char(obj.slots_who{2}(event)), ' & FREE  & ', obj.office,'  \\\\ \n']);
+                            fprintf(fid, '\\vspace{1mm} \n');
+                        else
+                            fprintf(fid, [char(obj.slots_who{2}(event)), ' & Meet with ', char(obj.slots_who{1}(event)), ' & ', obj.office,'  \\\\ \n']);
+                            fprintf(fid, '\\vspace{1mm} \n');
+                        
+                        end
                         if event == length(obj.slots) && flag_dinner == 0
                             fprintf(fid, [char(dinnertime) ' & Dinner with ', dinner_attendees, '  & ' obj.restaurantDinner ' \\\\ \n']);
                             fprintf(fid, '\\vspace{1mm} \n');
