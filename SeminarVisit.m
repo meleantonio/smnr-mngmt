@@ -299,19 +299,19 @@ classdef SeminarVisit < handle
                 flag_dinner = 0; % flag for dinner 
                 for event = 1: length(obj.slots) 
 
-                    % if it's time for seminar, then schedule seminar
-                    if str2num(char(obj.slots_who{2}(event))) > str2num(seminartime) && flag_seminar == 0 
-                        fprintf(fid, [char(seminartime) ' & \\begin{minipage}{.65\\textwidth}Seminar:  \\href{',obj.paperurl,'}{``',obj.papertitle,'"  }\\end{minipage}  & ' seminarroom ' \\\\ \n']);
-                        fprintf(fid, '\\vspace{1mm} \n');
-                        flag_seminar = 1;
-                    end  
-
                     % if it's time for lunch, then schedule lunch
                     if str2num(char(obj.slots_who{2}(event))) > str2num(lunchtime) && flag_lunch == 0 
                         fprintf(fid, [char(lunchtime) ' & Lunch with ', lunch_attendees, '  & ' obj.restaurantLunch ' \\\\ \n']);
                         fprintf(fid, '\\vspace{1mm} \n');
                         flag_lunch = 1;
                     end
+                    
+                    % if it's time for seminar, then schedule seminar
+                    if str2num(char(obj.slots_who{2}(event))) > str2num(seminartime) && flag_seminar == 0 
+                        fprintf(fid, [char(seminartime) ' & \\begin{minipage}{.65\\textwidth}Seminar:  \\href{',obj.paperurl,'}{``',obj.papertitle,'"  }\\end{minipage}  & ' seminarroom ' \\\\ \n']);
+                        fprintf(fid, '\\vspace{1mm} \n');
+                        flag_seminar = 1;
+                    end  
                     
                     % if it's time for dinner, then schedule dinner
                     if (str2num(char(obj.slots_who{2}(event))) > str2num(dinnertime) && flag_dinner == 0) 
