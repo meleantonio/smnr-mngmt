@@ -25,6 +25,7 @@ classdef SeminarVisit < handle
         lunch_who = {} % final allocation for dinner
         % these are matrices
         slotpreferences = [] % preferences for slots
+        dayOfWeek % day of the week for the seminar
     end
     
     methods
@@ -55,6 +56,10 @@ classdef SeminarVisit < handle
             obj.office = office;
             obj.restaurantLunch = restaurantLunch;
             obj.restaurantDinner = restaurantDinner;
+            DayForm = 'long';
+            language = 'en_US';
+            [~, DayName] = weekday(datenum(char(obj.datevisit),'dd/mm/yyyy'),DayForm,language);
+            obj.dayOfWeek = DayName;
         end
         
         function [G, slots, names,weighted_preferences, mealspreferences ] = extract_preferences(obj)
@@ -276,7 +281,7 @@ classdef SeminarVisit < handle
             fprintf(fid, '\\Large{\\textbf{Agenda}} \n');
             fprintf(fid, '\\end{center} \n');
 
-            fprintf(fid, ['\\textbf{Wednesday ', obj.datevisit, '}  \n']);
+            fprintf(fid, ['\\textbf{' char(obj.dayOfWeek) ', ', obj.datevisit, '}  \n']);
 
             fprintf(fid, '\\begin{table}[h!]  \n');
             fprintf(fid, '\\normalsize \n');
